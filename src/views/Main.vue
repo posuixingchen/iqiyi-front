@@ -18,13 +18,25 @@
 <script>
 import CommonAside from '../components/CommonAside.vue'
 import CommonHeader from '../components/CommonHeader.vue'
+import CommonTag from '../components/CommonTag.vue'
 export default {
     data() {
-        return {}
+        return {
+            isCollapse: true
+        }
     },
     components: {
         CommonAside,
-        CommonHeader
+        CommonHeader,
+        CommonTag
+    },
+    methods: {
+        handleOpen(key, keyPath) {
+            console.log(key, keyPath);
+        },
+        handleClose(key, keyPath) {
+            console.log(key, keyPath);
+        }
     }
 }
 </script>

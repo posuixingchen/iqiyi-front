@@ -134,13 +134,16 @@ export default {
 }
 
 .el-menu {
-    height: 100%;
-    border: none;
+    border-right: none;
+    height: 100vh;
 
     h3 {
         color: #fff;
         text-align: center;
-        line-height: 48px
+        line-height: 48px;
+        font-size: 16px;
+        margin: 0;
+        padding: 0
     }
 }
 </style>
