@@ -1,20 +1,20 @@
 <template>
-    <el-row class="home" :gutter="20">
+    <el-row class="home" style="padding-right:10px">
         <el-col :span="8" style="margin-top: 20px">
-            <el-card shadow="hover">
+            <el-card class="box-card">
                 <div class="user">
-                    <img :src="userImg" alt="">
+                    <img src="../assets/images/huahang.png" alt="">
                     <div class="userinfo">
                         <p class="name">{{ user.name }}</p>
                     </div>
                 </div>
                 <div class="login-info">
-                    <p>上次登录时间：<span>2023-09-01</span></p>
-                    <p>上次登录地点：<span>廊坊</span></p>
+                    <p>上次登录时间:<span>2023-6-1</span></p>
+                    <p>上次登录地点:<span>廊坊</span></p>
                 </div>
             </el-card>
         </el-col>
-        <el-col :span="16">
+        <el-col :span="16" style="padding-left:10px">
 
         </el-col>
     </el-row>
@@ -24,8 +24,9 @@
 export default {
     data() {
         return {
-            userImg: require('../assets/images/huahang.png'),
-
+            user: {
+                name: window.sessionStorage.getItem('name'),
+            },
         }
     },
     mounted() {
