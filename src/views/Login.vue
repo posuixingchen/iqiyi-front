@@ -20,15 +20,6 @@
                     </el-input>
                 </el-form-item>
 
-                <el-form-item calss="item" prop="password2">
-                    <span slot="label">
-                        <span style="color: white">确认密码</span>
-                    </span>
-                    <el-input v-model="loginUser.password" placeholder="请确认密码" type="password" style="opacity:0.8">
-                    </el-input>
-                </el-form-item>
-
-
                 <el-form-item>
                     <el-button type="primary" class="submit_btn" @click="submitForm('loginForm')">登 录</el-button>
                 </el-form-item>
@@ -42,23 +33,14 @@
 </template>
 
 <script>
+import { login } from '../api/user'
 import jwt_decode from "jwt-decode";
 export default {
     data() {
-        var validateCheckPass = (rule, value, callback) => {
-            if (value === '') {
-                callback(new Error('请再次输入密码'));
-            } else if (value !== this.register.password) {
-                callback(new Error('两次输入密码不一致!'));
-            } else {
-                callback();
-            }
-        };
         return {
             loginUser: {
                 name: "",
                 password: "",
-                password2: "",
             },
             rules: {
                 name: [
@@ -70,40 +52,23 @@ export default {
                     { required: true, message: "密码不能为空", trigger: "blur" },
                     { min: 6, max: 30, message: "长度在 6 到 30 个字符", trigger: "blur" }
                 ],
-
-                password2: [
-                    { required: true, message: "密码不能为空", trigger: "blur" },
-                    { min: 6, max: 30, message: "长度在 6 到 30 个字符", trigger: "blur" },
-                    { validator: validateCheckPass, }
-                ],
-
-            }
+            },
+            token: {}
         }
     },
     methods: {
         submitForm(formName) {
             this.$refs[formName].validate(valid => {
                 if (valid) {
-                    this.$axios.post('/user/login', this.loginUser)
-                        .then(res => {
-                            const { token } = res.data
-                            // console.log(token)
-                            localStorage.setItem('mytoken', token)
-
-                            // 解析token
-                            const decode = jwt_decode(token)
-                            // console.log(decode)
-
-                            // 将解析后的token存入vuex中
-                            this.$store.dispatch('setAuthenticated', !this.isEmpty(decode))
-                            this.$store.dispatch("setUser", decode)
-
+                    login(this.loginUser).then((response) => {
+                        const { code, data } = response.data
+                        if (code === '00000' && data) {
+                            window.sessionStorage.setItem('token', data.token)
+                            window.sessionStorage.setItem('name', data.name)
+                            this.$message.success('登录成功！')
                             this.$router.push('/')
-                        })
-                        .catch(err => {
-                            // console.log(err)
-                            this.$message.error('登录失败，请检查用户名及密码是否正确！')
-                        })
+                        }
+                    })
                 } else {
                     this.$message({
                         type: "error",
@@ -173,7 +138,7 @@ export default {
 }
 
 .tiparea {
-    text-align: right;
+    text-align: center;
     font-size: 12px;
     color: #fff;
 }

@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Main from "../views/Main.vue";
+import Cookie from 'js-cookie'
 
 Vue.use(VueRouter);
 
@@ -62,20 +63,17 @@ const routes = [
 ];
 
 const router = new VueRouter({
-    mode: "history",
-    base: process.env.BASE_URL,
-    routes,
-});
+    routes
+})
 
-// 路由守卫
-// router.beforeEach((to, from, next) => {
-//   const isLogin = localStorage.mytoken ? true : false;
-//   console.log(isLogin);
-//   if (to.path == "/login" || to.path == "/register") {
-//     next();
-//   } else {
-//     isLogin ? next() : next("/login");
-//   }
-// });
+router.beforeEach((to, from, next) => {
+    const isLogin = window.sessionStorage.getItem('token') ? true : false;
+    console.log(isLogin);
+    if (to.path == "/login" || to.path == "/register") {
+        next();
+    } else {
+        isLogin ? next() : next("/login");
+    }
+});
 
 export default router;
