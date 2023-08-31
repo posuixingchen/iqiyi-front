@@ -18,9 +18,9 @@ const routes = [
                 component: () => import("../views/Home.vue"),
             },
             {
-                path: "/count",
-                name: "count",
-                component: () => import("../views/Count.vue"),
+                path: "/actor",
+                name: "actor",
+                component: () => import("../views/Actor.vue"),
             },
             {
                 path: "/movie",

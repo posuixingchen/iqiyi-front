@@ -1,7 +1,7 @@
 <template>
     <el-menu default-active="1-4-1" class="el-menu-vertical-demo" background-color="#545c64" text-color="#fff"
         active-text-color="#ffd04b" @open="handleOpen" @close="handleClose" :collapse="isCollapse">
-        <h3>{{ isCollapse ? '爱奇艺' : '爱奇艺后台管理系统' }}</h3>
+        <h3>{{ isCollapse ? '新爱奇艺' : '全新爱奇艺后台管理系统' }}</h3>
         <!-- <template v-for="item in menu"> -->
         <router-link v-for="(item, index) in noChirdren" :to="item.path" :key="item.path">
             <el-menu-item :index="index.toString()" @click="clickMenu(item)">
@@ -45,11 +45,11 @@ export default {
                     url: 'Home/Home'
                 },
                 {
-                    path: '/count',
-                    name: 'count',
-                    label: '统计信息',
-                    icon: 's-data',
-                    url: 'Count/Count'
+                    path: '/actor',
+                    name: 'actor',
+                    label: '演员列表',
+                    icon: 's-custom',
+                    url: 'Actor/Actor'
                 },
 
                 {

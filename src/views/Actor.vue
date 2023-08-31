@@ -1,39 +1,33 @@
 <template>
     <div>
         <el-row style="text-align:left padding-left:10px ">
-            <el-button type="primary" @click="addMovie">添加电影</el-button>
+            <el-button type="primary" @click="addActor">添加演员</el-button>
         </el-row>
-        <el-dialog title="添加电影" :visible.sync="dialogVisible" width="50%" :before-close="handleClose">
-            <!-- 新增电影的表单信息 -->
+        <el-dialog title="添加演员" :visible.sync="dialogVisible" width="50%" :before-close="handleClose">
+            <!-- 新增演员的表单信息 -->
             <el-form ref="form" :rules="rules" :inline="true" :model="form" label-width="80px">
-                <el-form-item label="电影名" prop="name">
-                    <el-input placeholder="请输入电影名" v-model="form.name"></el-input>
+                <el-form-item label="演员名" prop="name">
+                    <el-input placeholder="请输入演员名" v-model="form.name"></el-input>
                 </el-form-item>
-                <el-form-item label="导演" prop="director">
-                    <el-input placeholder="请输入导演" v-model="form.director"></el-input>
-                </el-form-item>
-                <el-form-item label="电影时长" prop="time_length">
-                    <el-input placeholder="请输入电影时长" v-model="form.time_length"></el-input>
-                </el-form-item>
-                <el-form-item label="上映日期" prop="pub_date">
-                    <el-date-picker v-model="form.pub_date" type="date" placeholder="选择上映日期" value-format="yyyy-MM-DD">
+                <el-form-item label="生日" prop="birthday">
+                    <el-date-picker v-model="form.birthday" type="date" placeholder="选择生日" value-format="yyyy-MM-DD">
                     </el-date-picker>
                 </el-form-item>
-                <el-form-item label="评分" prop="rating">
-                    <el-input placeholder="请输入评分" v-model="form.rating"></el-input>
+                <el-form-item label="性别" prop="sex">
+                    <el-input placeholder="请输入评分" v-model="form.sex"></el-input>
                 </el-form-item>
-                <el-form-item label="电影类型" prop="categoryStr">
-                    <el-checkbox-group v-model="form.categoryStr">
-                        <el-checkbox v-for="cate in cateList" :key="cate.id" :label="cate.id" name="categoryStr">{{
-                            cate.catname
+                <el-form-item label="演员地区" prop="regionStr">
+                    <el-checkbox-group v-model="form.regionStr">
+                        <el-checkbox v-for="region in regionList" :key="region.id" :label="region.id" name="regionStr">{{
+                            region.name
                         }}</el-checkbox>
                     </el-checkbox-group>
                 </el-form-item>
-                <el-form-item label="电影简介" prop="description">
+                <el-form-item label="演员简介" prop="description">
                     <el-input autosize type="textarea" v-model="form.description"></el-input>
                 </el-form-item>
-                <el-form-item label="电影缩略图" prop="pic">
-                    <el-upload :limit="1" action="http://localhost:8081/movie/saveMovie" list-type="picture-card" multiple
+                <el-form-item label="演员缩略图" prop="pic">
+                    <el-upload :limit="1" action="http://localhost:8081/actor/saveActor" list-type="picture-card" multiple
                         :on-preview="handlePictureCardPreview" :on-remove="handleRemove" :auto-upload="false"
                         :on-change="fileChange" :file-list="fileList" ref="upload" :data="form" name="file">
                         <i class="el-icon-plus"></i>
@@ -63,17 +57,17 @@
         </el-dialog>
 
         <el-table :data="tableData" style="width: 100%">
-            <el-table-column label="电影名" width="180">
+            <el-table-column label="演员名" width="180">
                 <template slot-scope="scope">
                     <el-popover trigger="hover" placement="top" width="300">
                         <div align="center">
                             <img :src="'data:image/png;base64,' + scope.row.pic"
                                 style="width:250px; height:250px; padding: 0px 0px; align-content: center;">
                         </div>
-                        <p>电影名: {{ scope.row.name }}</p>
-                        <p>导演: {{ scope.row.director }}</p>
-                        <p>主演:<span v-for="(actor, index) in scope.row.actors" :key="index">{{ actor.name }}
-                                <span v-if="index === scope.row.actors.length - 1"></span>
+                        <p>演员名: {{ scope.row.name }}</p>
+                        <p>性别: {{ scope.row.sex }}</p>
+                        <p>地区: <span v-for="(region, index) in scope.row.regions" :key="index">{{ region.name }}
+                                <span v-if="index === scope.row.regions.length - 1"></span>
                                 <span v-else>/</span>
                             </span></p>
                         <p>简介: {{ scope.row.description }}</p>
@@ -83,22 +77,12 @@
                     </el-popover>
                 </template>
             </el-table-column>
-            <el-table-column label="主演" width="180">
-                <template slot-scope="scope">
-                    <span v-for="(actor, index) in scope.row.actors" :key="index">{{ actor.name }}
-                        <span v-if="index === scope.row.actors.length - 1"></span>
-                        <span v-else>/</span>
-                    </span>
-                </template>
-            </el-table-column>
-            <el-table-column prop="pub_date" label="上映日期" width="180"></el-table-column>
-            <el-table-column prop="time_length" label="电影时长" width="180"></el-table-column>
-            <el-table-column prop="rating" label="电影评分" width="180"></el-table-column>
+            <el-table-column prop="sex" label="性别" width="180"></el-table-column>
+            <el-table-column prop="birthday" label="生日" width="180"></el-table-column>
             <el-table-column label="操作">
                 <template slot-scope="scope">
                     <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
                     <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
-                    <el-button size="mini">播放</el-button>
                 </template>
             </el-table-column>
         </el-table>
@@ -106,7 +90,7 @@
 </template>
   
 <script>
-import { upLoad, findCategory, findMovie, saveMovie, deleteMovie } from '../api/movie'
+import { upLoad, findAllRegion, findActor, saveMovie, deleteActor } from '../api/actor'
 export default {
     data() {
         return {
@@ -115,14 +99,12 @@ export default {
             dialogImageUrl: '',
             dialogVisibleImage: false,
             tableData: [],
-            cateList: [],
+            regionList: [],
             form: {
                 name: '',
-                director: '',
-                pub_date: '',
-                time_length: '',
-                rating: '',
-                categoryStr: [],
+                sex: '',
+                birthday: '',
+                regionStr: [],
                 description: '',
                 file: '',
                 pic: '',
@@ -133,43 +115,37 @@ export default {
                     { required: true, message: '请输入姓名' }
                 ],
                 director: [
-                    { required: true, message: '请输入导演' }
+                    { required: true, message: '请选择性别' }
                 ],
                 pub_date: [
-                    { required: true, message: '请选择上映日期' }
-                ],
-                time_length: [
-                    { required: true, message: '请输入电影时长' }
-                ],
-                rating: [
-                    { required: true, message: '请输入电影评分' }
+                    { required: true, message: '请选择生日' }
                 ],
                 categoryStr: [
-                    { required: true, message: '请选择电影类型' }
+                    { required: true, message: '请选择演员类型' }
                 ],
                 description: [
-                    { required: true, message: '请输入电影简介' }
+                    { required: true, message: '请输入演员简介' }
                 ],
             },
         }
     },
     methods: {
-        //获取所有的电影列表
-        getMovie() {
-            findMovie().then((response) => {
+        //获取所有的演员列表
+        getActor() {
+            findActor().then((response) => {
                 console.log(response.data);
                 this.tableData = response.data.data
             })
         },
         //获取所有的类型
-        getCategory() {
-            findCategory().then((response) => {
+        getRegion() {
+            findAllRegion().then((response) => {
                 console.log(response.data);
-                this.cateList = response.data.data
+                this.regionList = response.data.data
             })
         },
-        //打开新增电影的弹窗
-        addMovie() {
+        //打开新增演员的弹窗
+        addActor() {
             this.dialogVisible = true
         },
         //改变文件的状态
@@ -188,7 +164,7 @@ export default {
         //         this.$refs.upload.clearFiles();
         //     })
         // },
-        //提交新增的电影
+        //提交新增的演员
         submit() {
             this.$refs.form.validate((valid) => {
                 // console.log(valid, 'valid')
@@ -204,11 +180,11 @@ export default {
                     this.$refs.form.resetFields()
                     // 关闭弹窗
                     this.dialogVisible = false
-                    this.getMovie()
+                    this.getActor()
                 }
             })
         },
-        //关闭新增电影弹窗
+        //关闭新增演员弹窗
         handleClose() {
             this.$refs.form.resetFields()
             this.dialogVisible = false
@@ -216,13 +192,13 @@ export default {
         cancel() {
             this.handleClose()
         },
-        //编辑电影
+        //编辑演员
         handleEdit(index, row) {
             var data = JSON.parse(JSON.stringify(row))
             var editid = data.id
-            this.$router.push({ path: "/editMovie", query: { id: editid } })
+            this.$router.push({ path: "/editActor", query: { id: editid } })
         },
-        //删除电影
+        //删除演员
         handleDelete(index, row) {
             var data = JSON.parse(JSON.stringify(row))
             var deleteid = data.id
@@ -231,13 +207,13 @@ export default {
                 cancelButtonText: '取消',
                 type: 'warning'
             }).then(() => {
-                deleteMovie(deleteid).then(() => {
+                deleteActor(deleteid).then(() => {
                     this.$message({
                         type: 'success',
                         message: '删除成功!'
                     });
                     // 重新获取列表的接口
-                    this.getMovie()
+                    this.getActor()
                 })
 
             }).catch(() => {
@@ -260,8 +236,8 @@ export default {
     //     this.getMovie();
     // },
     created() {
-        this.getMovie();
-        this.getCategory()
+        this.getActor();
+        this.getRegion();
     }
 }
 </script>
