@@ -14,7 +14,10 @@
                     </el-date-picker>
                 </el-form-item>
                 <el-form-item label="性别" prop="sex">
-                    <el-input placeholder="请输入评分" v-model="form.sex"></el-input>
+                    <el-radio-group v-model="form.sex">
+                        <el-radio prop="男" label="男"></el-radio>
+                        <el-radio prop="女" label="女"></el-radio>
+                    </el-radio-group>
                 </el-form-item>
                 <el-form-item label="演员地区" prop="regionStr">
                     <el-checkbox-group v-model="form.regionStr">
@@ -114,13 +117,13 @@ export default {
                 name: [
                     { required: true, message: '请输入姓名' }
                 ],
-                director: [
+                sex: [
                     { required: true, message: '请选择性别' }
                 ],
-                pub_date: [
+                birthday: [
                     { required: true, message: '请选择生日' }
                 ],
-                categoryStr: [
+                regionStr: [
                     { required: true, message: '请选择演员类型' }
                 ],
                 description: [

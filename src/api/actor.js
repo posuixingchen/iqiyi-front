@@ -31,6 +31,6 @@ export function findActorOne(id) {
 export function deleteActor(id) {
     return requset({
         url: `/actor/deleteActor/${id}`,
-        method: 'get',
+        method: 'post',
     })
 }

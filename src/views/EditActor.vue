@@ -107,7 +107,7 @@ export default {
                 this.regionList = response.data.data.allRegion
                 this.form.id = response.data.data.actor.id
                 this.form.name = response.data.data.actor.name
-                this.form.sex = response.data.data.sex
+                this.form.sex = response.data.data.actor.sex
                 this.form.birthday = response.data.data.actor.birthday
                 // this.$set(this.form, "birthday", response.data.data.actor.birthday)
                 this.form.description = response.data.data.actor.description
