@@ -5,7 +5,8 @@
         </el-row>
         <el-dialog title="添加演员" :visible.sync="dialogVisible" width="50%" :before-close="handleClose">
             <!-- 新增演员的表单信息 -->
-            <el-form ref="form" :rules="rules" :inline="true" :model="form" label-width="80px">
+            <el-form Content-Type="multipart/form-data" ref="form" :rules="rules" :inline="true" :model="form"
+                label-width="80px">
                 <el-form-item label="演员名" prop="name">
                     <el-input placeholder="请输入演员名" v-model="form.name"></el-input>
                 </el-form-item>
@@ -30,9 +31,10 @@
                     <el-input autosize type="textarea" v-model="form.description"></el-input>
                 </el-form-item>
                 <el-form-item label="演员缩略图" prop="pic">
-                    <el-upload :limit="1" action="http://localhost:8081/actor/saveActor" list-type="picture-card" multiple
-                        :on-preview="handlePictureCardPreview" :on-remove="handleRemove" :auto-upload="false"
-                        :on-change="fileChange" :file-list="fileList" ref="upload" :data="form" name="file">
+                    <el-upload Content-Type="multipart/form-data" :limit="1" action="http://localhost:8081/actor/saveActor"
+                        list-type="picture-card" multiple :on-preview="handlePictureCardPreview" :on-remove="handleRemove"
+                        :auto-upload="false" :on-change="fileChange" :file-list="fileList" ref="upload" :data="form"
+                        name="file">
                         <i class="el-icon-plus"></i>
                         <div slot="file" slot-scope="{file}">
                             <img class="el-upload-list__item-thumbnail" :src="file.url" alt="">
@@ -105,12 +107,12 @@ export default {
             regionList: [],
             form: {
                 name: '',
-                sex: '',
                 birthday: '',
-                regionStr: [],
+                sex: '',
                 description: '',
-                file: '',
                 pic: '',
+                regionStr: [],
+                file: '',
             },
             fileList: [],
             rules: {

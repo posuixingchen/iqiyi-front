@@ -25,10 +25,9 @@
                 <el-input autosize type="textarea" v-model="form.description"></el-input>
             </el-form-item>
             <el-form-item label="演员缩略图" prop="pic">
-                <el-upload :multiple="false" :limit="1" action="http://localhost:8081/actor/updateActor"
-                    list-type="picture-card" :on-preview="handlePictureCardPreview" :on-remove="handleRemove"
-                    :auto-upload="false" :on-change="fileChange" :file-list="fileList" ref="upload" :data="form"
-                    name="file">
+                <el-upload :limit="1" action="http://localhost:8081/actor/updateActor" list-type="picture-card"
+                    :on-preview="handlePictureCardPreview" :on-remove="handleRemove" :auto-upload="false"
+                    :on-change="fileChange" :file-list="fileList" ref="upload" :data="form" name="file">
                     <i class="el-icon-plus"></i>
                     <div slot="file" slot-scope="{file}">
                         <img class="el-upload-list__item-thumbnail" v-if="form.pic !== ''" width="100%"

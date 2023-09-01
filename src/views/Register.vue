@@ -2,7 +2,7 @@
     <div class="register">
         <section class="form_container">
             <div class="manage_tip">
-                <span class="title">全栈后台管理系统-注册</span>
+                <span class="title">爱奇艺后台管理系统-注册</span>
             </div>
             <el-form :model="registerUser" :rules="rules" class="registerForm" ref="registerForm" label-width="100px">
                 <el-form-item calss="item" prop="name">
