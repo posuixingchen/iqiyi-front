@@ -10,7 +10,7 @@
                     <el-input placeholder="请输入演员名" v-model="form.name"></el-input>
                 </el-form-item>
                 <el-form-item label="生日" prop="birthday">
-                    <el-date-picker v-model="form.birthday" type="date" placeholder="选择生日" value-format="yyyy-MM-DD">
+                    <el-date-picker v-model="form.birthday" type="date" placeholder="选择生日" value-format="yyyy-MM-dd">
                     </el-date-picker>
                 </el-form-item>
                 <el-form-item label="性别" prop="sex">

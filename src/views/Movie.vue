@@ -16,7 +16,7 @@
                     <el-input placeholder="请输入电影时长" v-model="form.time_length"></el-input>
                 </el-form-item>
                 <el-form-item label="上映日期" prop="pub_date">
-                    <el-date-picker v-model="form.pub_date" type="date" placeholder="选择上映日期" value-format="yyyy-MM-DD">
+                    <el-date-picker v-model="form.pub_date" type="date" placeholder="选择上映日期" value-format="yyyy-MM-dd">
                     </el-date-picker>
                 </el-form-item>
                 <el-form-item label="评分" prop="rating">

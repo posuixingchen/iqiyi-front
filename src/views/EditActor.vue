@@ -11,7 +11,7 @@
                 </el-radio-group>
             </el-form-item>
             <el-form-item label="生日" prop="birthday">
-                <el-date-picker v-model="form.birthday" type="date" placeholder="选择生日" value-format="yyyy-MM-DD">
+                <el-date-picker v-model="form.birthday" type="date" placeholder="选择生日" value-format="yyyy-MM-dd">
                 </el-date-picker>
             </el-form-item>
             <el-form-item label="地区" prop="regionStr">
@@ -139,7 +139,7 @@ export default {
                     this.$refs.upload.submit();
                     console.log(this.form)
                     this.$message.success('提交成功');
-                    this.$router.push('/movie')
+                    this.$router.push('/actor')
                 } else {
                     this.$message.error('提交未通过')
                 }
