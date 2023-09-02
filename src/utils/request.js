@@ -12,12 +12,12 @@ const service = axios.create({
 
 })
 
-axios.interceptors.request.use(config => {
-    if (config.data instanceof FormData) {
-        Object.assign(config.headers, config.data.getHeaders());
-    }
-    return config;
-});
+// axios.interceptors.request.use(config => {
+//     if (config.data instanceof FormData) {
+//         Object.assign(config.headers, config.data.getHeaders());
+//     }
+//     return config;
+// });
 //第三步 创建拦截器  http request 拦截器
 service.interceptors.request.use(
     config => {

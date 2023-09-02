@@ -1,8 +1,8 @@
 <template>
     <div style="width:60%">
         <el-form ref="form" :rules="rules" :model="form" label-width="120px">
-            <el-form-item label="电影名" prop="name">
-                <el-input placeholder="请输入电影名" v-model="form.name"></el-input>
+            <el-form-item label="演员名" prop="name">
+                <el-input placeholder="请输入演员名" v-model="form.name"></el-input>
             </el-form-item>
             <el-form-item prop="sex" label="性别">
                 <el-radio-group v-model="form.sex">
@@ -88,10 +88,10 @@ export default {
                     { required: true, message: '请选择生日' }
                 ],
                 regionStr: [
-                    { required: true, message: '请选择电影类型' }
+                    { required: true, message: '请选择演员地区' }
                 ],
                 description: [
-                    { required: true, message: '请输入电影简介' }
+                    { required: true, message: '请输入演员简介' }
                 ],
             },
         }

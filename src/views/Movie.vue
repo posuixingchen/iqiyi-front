@@ -33,7 +33,7 @@
                     <el-input autosize type="textarea" v-model="form.description"></el-input>
                 </el-form-item>
                 <el-form-item label="电影缩略图" prop="pic">
-                    <el-upload :limit="1" action="http://localhost:8081/movie/saveMovie" list-type="picture-card" multiple
+                    <el-upload :limit="1" action="http://localhost:8081/movie/saveMovie" list-type="picture-card"
                         :on-preview="handlePictureCardPreview" :on-remove="handleRemove" :auto-upload="false"
                         :on-change="fileChange" :file-list="fileList" ref="upload" :data="form" name="file">
                         <i class="el-icon-plus"></i>
@@ -106,7 +106,7 @@
 </template>
   
 <script>
-import { upLoad, findCategory, findMovie, saveMovie, deleteMovie } from '../api/movie'
+import { upLoad, findCategory, findMovie, deleteMovie } from '../api/movie'
 export default {
     data() {
         return {

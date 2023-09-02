@@ -5,8 +5,7 @@
         </el-row>
         <el-dialog title="添加演员" :visible.sync="dialogVisible" width="50%" :before-close="handleClose">
             <!-- 新增演员的表单信息 -->
-            <el-form Content-Type="multipart/form-data" ref="form" :rules="rules" :inline="true" :model="form"
-                label-width="80px">
+            <el-form ref="form" :rules="rules" :inline="true" :model="form" label-width="80px">
                 <el-form-item label="演员名" prop="name">
                     <el-input placeholder="请输入演员名" v-model="form.name"></el-input>
                 </el-form-item>
@@ -31,10 +30,9 @@
                     <el-input autosize type="textarea" v-model="form.description"></el-input>
                 </el-form-item>
                 <el-form-item label="演员缩略图" prop="pic">
-                    <el-upload Content-Type="multipart/form-data" :limit="1" action="http://localhost:8081/actor/saveActor"
-                        list-type="picture-card" multiple :on-preview="handlePictureCardPreview" :on-remove="handleRemove"
-                        :auto-upload="false" :on-change="fileChange" :file-list="fileList" ref="upload" :data="form"
-                        name="file">
+                    <el-upload :limit="1" action="http://localhost:8081/actor/saveActor" list-type="picture-card"
+                        :on-preview="handlePictureCardPreview" :on-remove="handleRemove" :auto-upload="false"
+                        :on-change="fileChange" :file-list="fileList" ref="upload" :data="form" name="file">
                         <i class="el-icon-plus"></i>
                         <div slot="file" slot-scope="{file}">
                             <img class="el-upload-list__item-thumbnail" :src="file.url" alt="">
@@ -95,7 +93,7 @@
 </template>
   
 <script>
-import { upLoad, findAllRegion, findActor, saveMovie, deleteActor } from '../api/actor'
+import { findAllRegion, findActor, deleteActor } from '../api/actor'
 export default {
     data() {
         return {
@@ -157,18 +155,6 @@ export default {
         fileChange(file, fileList) {
             this.fileList = fileList
         },
-        //单独上传文件
-        // handleFileUpload() {
-        //     this.form.file = this.fileList[0].raw;
-        //     // 调用后端服务器的接口
-        //     upLoad(this.form.file).then((res) => {
-        //         console.log(res.data.data)
-        //         this.form.pic = res.data.data
-        //     }).catch((e) => {
-        //         this.$message.error(e.message);
-        //         this.$refs.upload.clearFiles();
-        //     })
-        // },
         //提交新增的演员
         submit() {
             this.$refs.form.validate((valid) => {
@@ -179,7 +165,7 @@ export default {
                     // 后续对表单数据的处理
                     // saveMovie(this.form).then(() => {
                     //     // 重新获取列表的接口
-                    //     this.getMovie()
+                    //     this.getActor()
                     // })
                     // 清空表单的数据
                     this.$refs.form.resetFields()

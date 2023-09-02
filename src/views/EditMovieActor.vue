@@ -1,20 +1,20 @@
 <template>
     <div style="width:80%">
-        <el-form ref="mandcform" :rules="rules" :model="movieactorform" label-width="120px">
-            <el-select v-model="movieactorform.id" filterable placeholder="请选择电影名">
+        <el-form ref="form" :rules="rules" :model="form" label-width="120px">
+            <el-select v-model="form.id" filterable placeholder="请选择电影名">
                 <el-option v-for="item in movieList" :key="item.id" :label="item.name" :value="item.id">
                 </el-option>
             </el-select>
             <el-form-item label="请选择演员" prop="actorStr">
-                <el-checkbox-group v-model="movieactorform.actorStr">
+                <el-checkbox-group v-model="form.actorStr">
                     <el-checkbox v-for="actor in actorList" :key="actor.id" :label="actor.id" name="actorStr">{{
                         actor.name
                     }}</el-checkbox>
                 </el-checkbox-group>
             </el-form-item>
             <el-form-item>
-                <el-button type="primary" @click="submitForm(mandcform)">提交</el-button>
-                <el-button @click="resetForm(mandcform)">重置</el-button>
+                <el-button type="primary" @click="submitForm()">提交</el-button>
+                <el-button @click="resetForm()">重置</el-button>
             </el-form-item>
         </el-form>
     </div>
@@ -29,7 +29,7 @@ export default {
         return {
             movieList: [],
             actorList: [],
-            movieactorform: {
+            form: {
                 id: '',
                 actorStr: [],
             },
@@ -56,11 +56,11 @@ export default {
                 this.actorList = response.data.data
             })
         },
-        submitForm(formName) {
-            this.$refs[formName].validate(valid => {
+        submitForm() {
+            this.$refs.form.validate((valid) => {
                 if (valid) {
-                    console.log(this.movieactorform)
-                    saveMovieActor(this.movieactorform).then((response) => {
+                    console.log(this.form)
+                    saveMovieActor(this.form).then((response) => {
                         console.log(response)
                         this.resetForm()
                     })
