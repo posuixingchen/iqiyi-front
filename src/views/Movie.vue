@@ -98,7 +98,7 @@
                 <template slot-scope="scope">
                     <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
                     <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
-                    <el-button size="mini">播放</el-button>
+                    <el-button size="mini" @click="handlePlay(scope.$index, scope.row)">播放</el-button>
                 </template>
             </el-table-column>
         </el-table>
@@ -246,6 +246,11 @@ export default {
                     message: '已取消删除'
                 });
             });
+        },
+        handlePlay(index, row) {
+            var data = JSON.parse(JSON.stringify(row))
+            var editid = data.id
+            this.$router.push({ path: "/moviePlay", query: { id: editid } })
         },
         //删除缩略图
         handleRemove(file, fileList) {

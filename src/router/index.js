@@ -47,6 +47,11 @@ const routes = [
                 name: "editRecommend",
                 component: () => import("../views/EditRecommend.vue"),
             },
+            {
+                path: "/moviePlay",
+                name: "moviePlay",
+                component: () => import("../views/MoviePlayer.vue"),
+            },
         ],
     },
 

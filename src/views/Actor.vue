@@ -124,7 +124,7 @@ export default {
                     { required: true, message: '请选择生日' }
                 ],
                 regionStr: [
-                    { required: true, message: '请选择演员类型' }
+                    { required: true, message: '请选择演员地区' }
                 ],
                 description: [
                     { required: true, message: '请输入演员简介' }

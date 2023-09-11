@@ -44,6 +44,14 @@ export function findMovieOne(id) {
     })
 }
 
+// 查找一条电影播放信息
+export function findMoviePlay(id) {
+    return requset({
+        url: `/movie/findMoviePlay/${id}`,
+        method: 'get',
+    })
+}
+
 
 // 删除电影信息
 export function deleteMovie(id) {

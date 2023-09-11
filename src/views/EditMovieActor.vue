@@ -5,9 +5,9 @@
                 <el-option v-for="item in movieList" :key="item.id" :label="item.name" :value="item.id">
                 </el-option>
             </el-select>
-            <el-form-item label="请选择演员" prop="actorStr">
-                <el-checkbox-group v-model="form.actorStr">
-                    <el-checkbox v-for="actor in actorList" :key="actor.id" :label="actor.id" name="actorStr">{{
+            <el-form-item label="请选择演员" prop="actorIds">
+                <el-checkbox-group v-model="form.actorIds">
+                    <el-checkbox v-for="actor in actorList" :key="actor.id" :label="actor.id" name="actorIds">{{
                         actor.name
                     }}</el-checkbox>
                 </el-checkbox-group>
@@ -31,10 +31,10 @@ export default {
             actorList: [],
             form: {
                 id: '',
-                actorStr: [],
+                actorIds: [],
             },
             rules: {
-                actorStr: [
+                actorIds: [
                     { required: true, message: '请选择演员' }
                 ],
             },
