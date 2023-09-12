@@ -5,9 +5,9 @@
                 <el-option v-for="item in movieList" :key="item.id" :label="item.name" :value="item.id">
                 </el-option>
             </el-select>
-            <el-form-item label="请选择演员" prop="actorIds">
-                <el-checkbox-group v-model="form.actorIds">
-                    <el-checkbox v-for="actor in actorList" :key="actor.id" :label="actor.id" name="actorIds">{{
+            <el-form-item label="请选择演员" prop="actorStd">
+                <el-checkbox-group v-model="form.actorStd">
+                    <el-checkbox v-for="actor in actorList" :key="actor.id" :label="actor.id" name="actorStd">{{
                         actor.name
                     }}</el-checkbox>
                 </el-checkbox-group>
@@ -23,7 +23,7 @@
 <script>
 import { findActor } from '../api/actor'
 import { findMovie } from '../api/movie'
-import { saveMovieActor } from '../api/movieActor'
+import { updateMovieActor } from '../api/movieActor'
 export default {
     data() {
         return {
@@ -31,10 +31,10 @@ export default {
             actorList: [],
             form: {
                 id: '',
-                actorIds: [],
+                actorStd: [],
             },
             rules: {
-                actorIds: [
+                actorStd: [
                     { required: true, message: '请选择演员' }
                 ],
             },
@@ -60,18 +60,14 @@ export default {
             this.$refs.form.validate((valid) => {
                 if (valid) {
                     console.log(this.form)
-                    saveMovieActor(this.form).then((response) => {
+                    updateMovieActor(this.form).then((response) => {
                         console.log(response)
-                        this.resetForm()
                     })
                     this.$message.success('提交成功');
                 } else {
                     this.$message.error('提交未通过')
                 }
             })
-        },
-        resetForm() {
-            this.$refs.form.clearFields();
         },
     },
     mounted() {
